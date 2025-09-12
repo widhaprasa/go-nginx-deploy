@@ -1,5 +1,5 @@
 # Step 1: Build the Go app
-FROM golang:1.25.1-bookworm as builder
+FROM golang:1.25.1-alpine3.22 as builder
 
 WORKDIR /app
 COPY . .
@@ -8,12 +8,10 @@ COPY . .
 RUN go build -o app .
 
 # Step 2: Create the image with Nginx and the Go binary
-FROM nginx:1.29.1-bookworm
+FROM fabiocicerchia/nginx-lua:1.28.0-alpine3.22.1
 
 # Install supervisor to run multiple processes
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends supervisor && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache supervisor
 
 # Copy the supervisor configuration
 ADD supervisord.conf /etc/

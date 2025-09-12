@@ -1,3 +1,3 @@
-module github.com/widhaprasa/nginx-fileupload
+module github.com/widhaprasa/go-nginx-deploy
 
-go 1.21.6
+go 1.25.1
