@@ -1,5 +1,5 @@
 # Step 1: Build the Go app
-FROM golang:1.25.1-bookworm as builder
+FROM golang:1.26.4-trixie as builder
 
 WORKDIR /app
 COPY . .
@@ -8,7 +8,7 @@ COPY . .
 RUN go build -o app .
 
 # Step 2: Create the image with Nginx and the Go binary
-FROM nginx:1.29.1-bookworm
+FROM nginx:1.31.1-trixie
 
 # Install supervisor to run multiple processes
 RUN apt-get update && \
